@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <cc:interface>
+        <cc:attribute name="bean" required="true"/>
+        <cc:attribute name="updateIds" required="true" />
+        <cc:attribute name="entriesNos" required="true" />
+        <cc:attribute name="showEntriesLabel" default="#{cc.resourceBundleMap.LABEL_ENTRIES}" />
+        <cc:attribute name="firstLabel" default="#{cc.resourceBundleMap.FIRST}" />
+        <cc:attribute name="previousLabel" default="#{cc.resourceBundleMap.PREVIOUS}"/>
+        <cc:attribute name="nextLabel" default="#{cc.resourceBundleMap.NEXT}"/>
+        <cc:attribute name="lastLabel" default="#{cc.resourceBundleMap.LAST}"/>
+        <cc:attribute name="pageNoLabel" default="#{cc.resourceBundleMap.PAGE_NO}"/>
+    </cc:interface>
+
+    <cc:implementation>
+        <b:buttonGroup>
+            <h:outputText value="#{cc.attrs.showEntriesLabel}"/>
+            <p:spacer width="5" height="5"/>
+            <h:selectOneMenu value="#{cc.attrs.bean.noOfRows}"
+                             valueChangeListener="#{cc.attrs.bean.onShowEntriesChange}">
+                <f:ajax event="change" render="#{cc.attrs.updateIds}" />
+                <f:selectItems value="#{fn:split(cc.attrs.entriesNos, ',')}"
+                               var="num" itemLabel="#{num}" itemValue="#{num}" />
+            </h:selectOneMenu>
+        </b:buttonGroup>
+        <p:spacer width="5" height="5"/>
+        <b:buttonGroup>
+            <b:commandButton value="#{cc.attrs.firstLabel}" action="#{cc.attrs.bean.first}" ajax="true" update="#{cc.attrs.updateIds}"
+                             disabled="#{cc.attrs.bean.startIndex eq 0}"
+                             look="primary"/>
+        </b:buttonGroup>
+        <p:spacer width="5" height="5"/>
+        <b:buttonGroup>
+            <b:commandButton value="#{cc.attrs.previousLabel}" action="#{cc.attrs.bean.previous}" ajax="true" update="#{cc.attrs.updateIds}"
+                             disabled="#{cc.attrs.bean.startIndex eq 0}" look="primary"/>
+        </b:buttonGroup>
+        <p:spacer width="5" height="5"/>
+        <b:buttonGroup>
+            <b:commandButton value="#{cc.attrs.nextLabel}" action="#{cc.attrs.bean.next}" ajax="true" update="#{cc.attrs.updateIds}"
+                             disabled="#{cc.attrs.bean.endIndex eq cc.attrs.bean.count}" look="primary"/>
+        </b:buttonGroup>
+        <p:spacer width="5" height="5"/>
+        <b:buttonGroup>
+            <b:commandButton value="#{cc.attrs.lastLabel}" action="#{cc.attrs.bean.last}" ajax="true" update="#{cc.attrs.updateIds}"
+                             disabled="#{cc.attrs.bean.endIndex eq cc.attrs.bean.count}" look="primary"/>
+        </b:buttonGroup>
+        <p:spacer width="5" height="5"/>
+        <b:buttonGroup>
+            <h:outputText value="#{cc.attrs.pageNoLabel}"/>
+            <h:selectOneMenu value="#{cc.attrs.bean.pageNo}" valueChangeListener="#{cc.attrs.bean.onPageNoChange}">
+                <f:ajax event="change" render="#{cc.attrs.updateIds}" />
+                <c:forEach begin="1" end="#{cc.attrs.bean.noOfPages}" var="num">
+                    <f:selectItem itemLabel="#{num}" itemValue="#{num}" />
+                </c:forEach>
+            </h:selectOneMenu>
+            <h:outputText value=" / #{cc.attrs.bean.noOfPages}"/>
+        </b:buttonGroup>
+    </cc:implementation>
+</ui:composition>
