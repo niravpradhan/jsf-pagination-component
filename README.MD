@@ -57,7 +57,7 @@ initial pagination variables and list. E.g.
                          firstLabel="#{labels.FIRST}" previousLabel="#{labels.PREVIOUS}"
                          nextLabel="#{labels.NEXT}" lastLabel="#{labels.LAST}"/>
   ``` 
-  1. bean attribute value is used to specify pagination bean which implements AbstractPaginationBean.
+  1. bean attribute value is used to specify pagination bean which extends AbstractPaginationBean.
   2. updateIds attribute value should be parent component which contains both table and pagination
      component.
   3. entriesNo attribute value should be comma seperated values for entries per page.
