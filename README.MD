@@ -1,6 +1,7 @@
 # JSF Pagination Component
 This Pagination componenet can be used with any jsf component library datatable provided 
-the built in pagination needs to be disabled for those datatables. It can be used with html 
+the built in pagination needs to be disabled for those datatables. Its designed using jsf com
+ composite component, offers alternative to pagination. It can be used with html 
 table generated with <ui:repeat>. It supports Next Page, Previous Page, First Page, Last Page
 Entries per page, Going to specific page in table view.
 
@@ -11,7 +12,7 @@ javaee-web-api-8.0, myfaces-api-2.3.1, myfaces-impl, primeface-2.3.1s-6.2,
 bootsfaces-1.3.1, java-10, tested on tomcat 9
 
 It can be customized to use different jsf components to build pagination composite 
-component.
+component by removing bootfaces, primefaces components and using only jsf specific components.
 
 ### Usage
 The pagination can be implemented by extending <link>me.niravpradhan.jsf.utils.AbstractPaginationBean<E></link>
