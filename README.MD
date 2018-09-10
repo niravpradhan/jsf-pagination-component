@@ -1,6 +1,6 @@
 # JSF Pagination Component
 This Pagination componenet can be used with any jsf component library datatable provided 
-the built in pagination needs to be disabled for those datatables. Its designed using jsf com
+the built in pagination needs to be disabled for those datatables. Its designed using jsf
  composite component, offers alternative to pagination. It can be used with html 
 table generated with <ui:repeat>. It supports Next Page, Previous Page, First Page, Last Page
 Entries per page, Going to specific page in table view.
